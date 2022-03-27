@@ -19,9 +19,34 @@
 	<h3 class="display-3">Employee Directory</h3>
 	<hr>
 	
-	<a th:href="@{/employees/showFormForAdd}" 
-	class="btn btn-primary btn-sm mb-3">
-	Add Employee</a>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<a th:href="@{/employees/showFormForAdd}" 
+					class="btn btn-primary btn-sm mb-3">
+					Add Employee</a>
+			</div>
+			<div class="col-6">
+		    </div>
+			<div class="col" >
+			<p class="float-right">
+			
+			<!--  User: <p th:text="authority : ${#authentication.name}"></p>-->
+			
+			User: <span sec:authentication="name" >
+		    </span>
+			<br>
+			Role(s): <span th:each="authority : ${#authentication.getAuthorities()}"
+		       th:if="${authority.getAuthority().startsWith('ROLE_')}"
+		       th:text="${authority.getAuthority().replaceFirst('ROLE_', '')}">
+		    </span>
+			</div>
+		</div>
+	</div>
+	
+	
+
 	
 	<table class="table table-bordered table-striped table-hover">
 		<thead class="table-dark">
